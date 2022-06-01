@@ -1,23 +1,27 @@
 
 package modell;
 
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class Lada {
     public static final String ARANY="arany",EZUST="ezüst",BRONZ="bronz",NINCS="nem ismert";
     private String fajta,szoveg;
     private boolean kincses;
-    private Icon lada_kep;
+    private ImageIcon lada_kep;
     
     
-    Lada(String fajta, boolean kincses,Icon url){
+    public Lada(String fajta, boolean kincses,String szoveg){
+        setFajta(fajta);
+        setKincses(kincses);
+        this.szoveg = szoveg;
         
     }
 
-    public void setFajta(String fajta) {
+    private void setFajta(String fajta) {
         switch(fajta){
             case ARANY:
                 this.fajta =ARANY;
+                //this.lada_kep = new ImageIcon("/modell.lada_kep/Arany.png");
                 break;
             case EZUST:
                 this.fajta=EZUST;
@@ -30,12 +34,8 @@ public class Lada {
         }
     }
 
-    public void setKincses(boolean kincses) {
+    private void setKincses(boolean kincses) {
         this.kincses = kincses;
-    }
-
-    public void setLada_kep(Icon lada_kep) {
-        this.lada_kep = lada_kep;
     }
 
     public String getFajta() {
@@ -50,7 +50,7 @@ public class Lada {
         return kincses;
     }
 
-    public Icon getLada_kep() {
+    public ImageIcon getLada_kep() {
         return lada_kep;
     }
 }
