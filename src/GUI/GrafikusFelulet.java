@@ -5,20 +5,32 @@
  */
 package GUI;
 
-import modell.Lada;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author hallgato
  */
 public class GrafikusFelulet extends javax.swing.JFrame {
- 
+    private final Color gombokszine;
+    private static JLabel[] tomb;
+    private int x;
+    private int y;
+
     /**
      * Creates new form GrafikusFelulet
      */
     public GrafikusFelulet() {
-
         initComponents();
+        setLocationRelativeTo(null);
+        gombokszine = menu2.getBackground();
+        gombok();
     }
 
     /**
@@ -31,11 +43,13 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     private void initComponents() {
 
         titlebar = new javax.swing.JPanel();
-        cim = new javax.swing.JLabel();
         kilepes = new javax.swing.JLabel();
+        cim = new javax.swing.JLabel();
         menubar = new javax.swing.JPanel();
-        menu1 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        menu1 = new javax.swing.JLabel();
+        menu2 = new javax.swing.JLabel();
+        menu3 = new javax.swing.JLabel();
+        menu4 = new javax.swing.JLabel();
         fotarolo = new javax.swing.JPanel();
         visszajelzes = new javax.swing.JPanel();
         ladatarolo = new javax.swing.JPanel();
@@ -48,13 +62,29 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         setResizable(false);
 
         titlebar.setBackground(new java.awt.Color(60, 60, 60));
+        titlebar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                titlebarMouseDragged(evt);
+            }
+        });
+        titlebar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                titlebarMousePressed(evt);
+            }
+        });
+
+        kilepes.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        kilepes.setForeground(new java.awt.Color(228, 228, 228));
+        kilepes.setText("X");
+        kilepes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kilepesMouseClicked(evt);
+            }
+        });
 
         cim.setFont(new java.awt.Font("Lato Semibold", 1, 18)); // NOI18N
         cim.setForeground(new java.awt.Color(255, 255, 255));
         cim.setText("Kincskereső");
-
-        kilepes.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
-        kilepes.setText("X");
 
         javax.swing.GroupLayout titlebarLayout = new javax.swing.GroupLayout(titlebar);
         titlebar.setLayout(titlebarLayout);
@@ -63,57 +93,62 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             .addGroup(titlebarLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(cim, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 620, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(kilepes, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         titlebarLayout.setVerticalGroup(
             titlebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(cim, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(cim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(kilepes))
         );
 
         menubar.setBackground(new java.awt.Color(172, 172, 172));
 
-        menu1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        menu1.setBackground(new java.awt.Color(102, 102, 102));
+        menu1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        menu1.setForeground(new java.awt.Color(204, 204, 204));
+        menu1.setText("Új játék");
+        menu1.setOpaque(true);
 
-        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
-        menu1.setLayout(menu1Layout);
-        menu1Layout.setHorizontalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
-        );
-        menu1Layout.setVerticalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
+        menu2.setBackground(new java.awt.Color(102, 102, 102));
+        menu2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        menu2.setForeground(new java.awt.Color(204, 204, 204));
+        menu2.setText("Megoldás");
+        menu2.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 49, Short.MAX_VALUE)
-        );
+        menu3.setBackground(new java.awt.Color(102, 102, 102));
+        menu3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        menu3.setForeground(new java.awt.Color(204, 204, 204));
+        menu3.setText("Kérdés");
+        menu3.setOpaque(true);
+
+        menu4.setBackground(new java.awt.Color(102, 102, 102));
+        menu4.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        menu4.setForeground(new java.awt.Color(204, 0, 51));
+        menu4.setText("Kilépés");
+        menu4.setOpaque(true);
 
         javax.swing.GroupLayout menubarLayout = new javax.swing.GroupLayout(menubar);
         menubar.setLayout(menubarLayout);
         menubarLayout.setHorizontalGroup(
             menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menu2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+            .addComponent(menu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menu3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menubarLayout.setVerticalGroup(
             menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menubarLayout.createSequentialGroup()
-                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(menu3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menu4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         fotarolo.setBackground(new java.awt.Color(200, 200, 200));
@@ -199,7 +234,7 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 .addGroup(fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ladatarolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(visszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         fotaroloLayout.setVerticalGroup(
             fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,6 +268,68 @@ public class GrafikusFelulet extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void mauseHover(int funkcio, JLabel panel, Color szin1, Color szin2) { //1=Text szinezés 2=Háttér szinezés
+        if (funkcio == 1) {
+            panel.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent evt) {
+                    panel.setForeground(szin1);
+                }
+
+                public void mouseExited(MouseEvent evt) {
+                    panel.setForeground(szin2);
+                }
+            });
+        } else if (funkcio == 2) {
+            panel.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent evt) {
+                    panel.setBackground(szin1);
+                }
+
+                public void mouseExited(MouseEvent evt) {
+                    panel.setBackground(szin2);
+                }
+            });
+        }
+    }
+
+    private void gombok() {
+        tomb = new JLabel[menubar.getComponentCount()];
+        for (int i = 0; i < tomb.length; i++) {
+            Component component = menubar.getComponent(i);
+            if (component instanceof JLabel) {
+                JLabel gomb = (JLabel) component;
+                tomb[i] = gomb;
+            }
+        }
+        mauseHover(1, kilepes, Color.red, Color.white);
+        for (JLabel menugomb : tomb) {
+            mauseHover(2, menugomb, Color.GRAY, gombokszine);
+        }
+    }
+    private void kilepesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kilepesMouseClicked
+
+        kilep();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kilepesMouseClicked
+
+    private void titlebarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titlebarMouseDragged
+        // TODO add your handling code here:
+        int xx = evt.getXOnScreen();
+        int yy = evt.getYOnScreen();
+        this.setLocation(xx - x, yy - y);
+    }//GEN-LAST:event_titlebarMouseDragged
+
+    private void titlebarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titlebarMousePressed
+        x = evt.getX();
+        y = evt.getY();  // TODO add your handling code here:
+    }//GEN-LAST:event_titlebarMousePressed
+    private void kilep() {
+        String[] gombok = {"Igen", "Nem"};
+        int valasz = JOptionPane.showOptionDialog(null, "Biztosan szeretnél kilépni?", "Kilépés", JOptionPane.YES_NO_OPTION, 3, null, gombok, gombok[1]);
+        if (valasz == 0) {
+            System.exit(0);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -272,12 +369,12 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cim;
     private javax.swing.JPanel fotarolo;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel kilepes;
     private javax.swing.JPanel ladatarolo;
-    private javax.swing.JPanel menu1;
+    private javax.swing.JLabel menu1;
+    private javax.swing.JLabel menu2;
+    private javax.swing.JLabel menu3;
+    private javax.swing.JLabel menu4;
     private javax.swing.JPanel menubar;
     private javax.swing.JPanel tarolo1;
     private javax.swing.JPanel tarolo2;
