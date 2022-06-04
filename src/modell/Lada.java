@@ -27,17 +27,20 @@ public class Lada {
         switch(fajta){
             case ARANY:
                 this.fajta =ARANY;
-                //this.lada_kep = new ImageIcon("/modell.lada_kep/Arany.png");
+                this.lada_kep = new ImageIcon("./modell.lada_kep/Arany.png");
                 break;
             case EZUST:
                 this.fajta=EZUST;
+                this.lada_kep = new ImageIcon("./modell.lada_kep/Ezust.png");
                 break;
             case BRONZ:
                 this.fajta=BRONZ;
+                this.lada_kep = new ImageIcon("./modell.lada_kep/Bronz.png");
                 break;
             default:
                 System.out.println(ANSI_RED + "FIGYELEM:a megadott láda fajta nem létezik. \nAz alapértelmezett érték kerül beállításra! [BRONZ]" + ANSI_RESET);
                 this.fajta=BRONZ;
+                this.lada_kep = new ImageIcon("./modell.lada_kep/Bronz.png");
         }
     }
 

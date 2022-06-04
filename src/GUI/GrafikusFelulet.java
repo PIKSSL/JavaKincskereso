@@ -5,16 +5,19 @@
  */
 package GUI;
 
+import modell.Lada;
+
 /**
  *
  * @author hallgato
  */
 public class GrafikusFelulet extends javax.swing.JFrame {
-
+ 
     /**
      * Creates new form GrafikusFelulet
      */
     public GrafikusFelulet() {
+
         initComponents();
     }
 
@@ -27,27 +30,205 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        titlebar = new javax.swing.JPanel();
+        cim = new javax.swing.JLabel();
+        kilepes = new javax.swing.JLabel();
+        menubar = new javax.swing.JPanel();
+        menu1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        fotarolo = new javax.swing.JPanel();
+        visszajelzes = new javax.swing.JPanel();
+        ladatarolo = new javax.swing.JPanel();
+        tarolo3 = new javax.swing.JPanel();
+        tarolo2 = new javax.swing.JPanel();
+        tarolo1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
-        jButton1.setText("jButton1");
+        titlebar.setBackground(new java.awt.Color(60, 60, 60));
+
+        cim.setFont(new java.awt.Font("Lato Semibold", 1, 18)); // NOI18N
+        cim.setForeground(new java.awt.Color(255, 255, 255));
+        cim.setText("Kincskereső");
+
+        kilepes.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        kilepes.setText("X");
+
+        javax.swing.GroupLayout titlebarLayout = new javax.swing.GroupLayout(titlebar);
+        titlebar.setLayout(titlebarLayout);
+        titlebarLayout.setHorizontalGroup(
+            titlebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titlebarLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(cim, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 620, Short.MAX_VALUE)
+                .addComponent(kilepes, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        titlebarLayout.setVerticalGroup(
+            titlebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(cim, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(kilepes))
+        );
+
+        menubar.setBackground(new java.awt.Color(172, 172, 172));
+
+        menu1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
+        menu1.setLayout(menu1Layout);
+        menu1Layout.setHorizontalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 215, Short.MAX_VALUE)
+        );
+        menu1Layout.setVerticalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 49, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout menubarLayout = new javax.swing.GroupLayout(menubar);
+        menubar.setLayout(menubarLayout);
+        menubarLayout.setHorizontalGroup(
+            menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        menubarLayout.setVerticalGroup(
+            menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menubarLayout.createSequentialGroup()
+                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        fotarolo.setBackground(new java.awt.Color(200, 200, 200));
+
+        visszajelzes.setBackground(new java.awt.Color(159, 162, 163));
+
+        javax.swing.GroupLayout visszajelzesLayout = new javax.swing.GroupLayout(visszajelzes);
+        visszajelzes.setLayout(visszajelzesLayout);
+        visszajelzesLayout.setHorizontalGroup(
+            visszajelzesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        visszajelzesLayout.setVerticalGroup(
+            visszajelzesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        ladatarolo.setBackground(new java.awt.Color(200, 200, 200));
+
+        javax.swing.GroupLayout tarolo3Layout = new javax.swing.GroupLayout(tarolo3);
+        tarolo3.setLayout(tarolo3Layout);
+        tarolo3Layout.setHorizontalGroup(
+            tarolo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 176, Short.MAX_VALUE)
+        );
+        tarolo3Layout.setVerticalGroup(
+            tarolo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 166, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout tarolo2Layout = new javax.swing.GroupLayout(tarolo2);
+        tarolo2.setLayout(tarolo2Layout);
+        tarolo2Layout.setHorizontalGroup(
+            tarolo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 176, Short.MAX_VALUE)
+        );
+        tarolo2Layout.setVerticalGroup(
+            tarolo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 166, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout tarolo1Layout = new javax.swing.GroupLayout(tarolo1);
+        tarolo1.setLayout(tarolo1Layout);
+        tarolo1Layout.setHorizontalGroup(
+            tarolo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 176, Short.MAX_VALUE)
+        );
+        tarolo1Layout.setVerticalGroup(
+            tarolo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 166, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout ladataroloLayout = new javax.swing.GroupLayout(ladatarolo);
+        ladatarolo.setLayout(ladataroloLayout);
+        ladataroloLayout.setHorizontalGroup(
+            ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ladataroloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tarolo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tarolo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tarolo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        ladataroloLayout.setVerticalGroup(
+            ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ladataroloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tarolo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tarolo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tarolo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout fotaroloLayout = new javax.swing.GroupLayout(fotarolo);
+        fotarolo.setLayout(fotaroloLayout);
+        fotaroloLayout.setHorizontalGroup(
+            fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fotaroloLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ladatarolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(visszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        fotaroloLayout.setVerticalGroup(
+            fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fotaroloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ladatarolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(visszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titlebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jButton1)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addComponent(menubar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(fotarolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jButton1)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(titlebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fotarolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menubar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -89,6 +270,19 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel cim;
+    private javax.swing.JPanel fotarolo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel kilepes;
+    private javax.swing.JPanel ladatarolo;
+    private javax.swing.JPanel menu1;
+    private javax.swing.JPanel menubar;
+    private javax.swing.JPanel tarolo1;
+    private javax.swing.JPanel tarolo2;
+    private javax.swing.JPanel tarolo3;
+    private javax.swing.JPanel titlebar;
+    private javax.swing.JPanel visszajelzes;
     // End of variables declaration//GEN-END:variables
 }
