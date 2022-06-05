@@ -12,9 +12,13 @@ public class Lada {
     private Icon lada_kep;
     private static int hany;
     
+    
+    public Lada(String fajta, String szoveg){
+        this(fajta,false,szoveg);
+    }
     public Lada(String fajta, boolean kincses,String szoveg){
         setFajta(fajta);
-        setKincses(kincses);
+        this.kincses=kincses;
         this.szoveg = szoveg;
         if(kincses)
             hany++;
@@ -43,10 +47,6 @@ public class Lada {
                 this.fajta=BRONZ;
                 this.lada_kep =new ImageIcon( "src/modell/lada_kep/Bronz.png");
         }
-    }
-
-    private void setKincses(boolean kincses) {
-        this.kincses = kincses;
     }
 
     @Override
