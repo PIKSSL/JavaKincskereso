@@ -108,7 +108,7 @@ public class Jatek {
     }
 
     public static String getMegoldas(String helyes) {
-        return "A helyes megoldás:Az " + helyes + " láda rejti a kincset.\nHa az arany igazat mond, akkor az ezüst is, ezért az arany kizárva.Ha nincs az aranyban, akkor a Bronz mond igazat, tehát az ezüst is hazudik. És mivel az ezüst azt állítja, hogy nem ő rejti a kincset, ami nem igaz, így a megoldás az, hogy az ezüst ládában van elrejtve a kincs.";
+        return "A helyes megoldás:Az " + helyes + " láda rejti a kincset.\nHa az arany rejtené a kincset, az arany és az ezüst is igazat mondana, de a mi feltételünk szerint csak 1 igaz állítás van. Ha a bronz rejtené, akkor a bronz és az ezüst is igazat mondana, ami szintén nem jó. Tehát az ezüst rejti a kicnset.";
     }
 
     private void ladaellenorzes() {
