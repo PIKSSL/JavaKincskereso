@@ -10,7 +10,7 @@ public class Jatek {
 
     private static final Scanner beker = new Scanner(System.in);
     private static GrafikusFelulet gui;
-    private Lada[] ladak = new Lada[3];
+    private static Lada[] ladak = new Lada[3];
     private static final String menu="\n[1]Megoldás\n[2]Új játék\n[3]Kilépés";
 
     Jatek() {
@@ -39,6 +39,7 @@ public class Jatek {
     private void konzolJatek() {
         System.out.println("Üdvözöllek a játékban!\nAdott 3 láda, egy arany, egy ezüst és egy bronz. Az egyikük drága kincset rejt magában.\nMelyik láda rejti a kincet?\nSegítség:Csak az egyik láda mondd igazat!\nA ládák segítenek neked abban, hogy megtudd!:)\nJó gondolkodást!");
         int index = 1;
+        
         for (Lada lada : ladak) {
             System.out.println("[" + index + "]A(z) " + lada.getFajta() + " láda azt mondja: '" + lada.getSzoveg() + "'");
             index++;
@@ -90,4 +91,9 @@ public class Jatek {
         }
         return true;
     }
+
+    public static Lada[] getLadak() {
+        return ladak;
+    }
+     
 }

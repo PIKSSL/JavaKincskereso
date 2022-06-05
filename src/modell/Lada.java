@@ -8,7 +8,7 @@ public class Lada {
     public static final String ARANY="arany",EZUST="ezüst",BRONZ="bronz";
     private String fajta,szoveg;
     private boolean kincses;
-    private ImageIcon lada_kep;
+    private String lada_kep;
     private static int hany;
     
     public Lada(String fajta, boolean kincses,String szoveg){
@@ -27,20 +27,20 @@ public class Lada {
         switch(fajta){
             case ARANY:
                 this.fajta =ARANY;
-                this.lada_kep = new ImageIcon("./modell.lada_kep/Arany.png");
+                this.lada_kep ="./modell.lada_kep/Arany.png";
                 break;
             case EZUST:
                 this.fajta=EZUST;
-                this.lada_kep = new ImageIcon("./modell.lada_kep/Ezust.png");
+                this.lada_kep = "./modell.lada_kep/Ezust.png";
                 break;
             case BRONZ:
                 this.fajta=BRONZ;
-                this.lada_kep = new ImageIcon("./modell.lada_kep/Bronz.png");
+                this.lada_kep = "./modell.lada_kep/Bronz.png";
                 break;
             default:
                 System.out.println(ANSI_RED + "FIGYELEM:a megadott láda fajta nem létezik. \nAz alapértelmezett érték kerül beállításra! [BRONZ]" + ANSI_RESET);
                 this.fajta=BRONZ;
-                this.lada_kep = new ImageIcon("./modell.lada_kep/Bronz.png");
+                this.lada_kep = "./modell.lada_kep/Bronz.png";
         }
     }
 
@@ -65,7 +65,7 @@ public class Lada {
         return kincses;
     }
 
-    public ImageIcon getLada_kep() {
+    public String getLada_kep() {
         return lada_kep;
     }
 }

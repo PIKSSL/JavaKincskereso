@@ -7,11 +7,14 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modell.Lada;
+import program.Jatek;
 
 /**
  *
@@ -19,7 +22,9 @@ import javax.swing.JPanel;
  */
 public class GrafikusFelulet extends javax.swing.JFrame {
     private final Color gombokszine;
-    private static JLabel[] tomb;
+    private JLabel[] tomb;
+    private JPanel[] tomb_panel;
+    private final Lada[] ladak = Jatek.getLadak();
     private int x;
     private int y;
 
@@ -52,10 +57,12 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         menu4 = new javax.swing.JLabel();
         fotarolo = new javax.swing.JPanel();
         visszajelzes = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         ladatarolo = new javax.swing.JPanel();
-        tarolo3 = new javax.swing.JPanel();
-        tarolo2 = new javax.swing.JPanel();
-        tarolo1 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -155,51 +162,32 @@ public class GrafikusFelulet extends javax.swing.JFrame {
 
         visszajelzes.setBackground(new java.awt.Color(159, 162, 163));
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout visszajelzesLayout = new javax.swing.GroupLayout(visszajelzes);
         visszajelzes.setLayout(visszajelzesLayout);
         visszajelzesLayout.setHorizontalGroup(
             visszajelzesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGroup(visszajelzesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         visszajelzesLayout.setVerticalGroup(
             visszajelzesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, visszajelzesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         ladatarolo.setBackground(new java.awt.Color(200, 200, 200));
 
-        javax.swing.GroupLayout tarolo3Layout = new javax.swing.GroupLayout(tarolo3);
-        tarolo3.setLayout(tarolo3Layout);
-        tarolo3Layout.setHorizontalGroup(
-            tarolo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
-        );
-        tarolo3Layout.setVerticalGroup(
-            tarolo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
-        );
+        jButton4.setText("jButton4");
 
-        javax.swing.GroupLayout tarolo2Layout = new javax.swing.GroupLayout(tarolo2);
-        tarolo2.setLayout(tarolo2Layout);
-        tarolo2Layout.setHorizontalGroup(
-            tarolo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
-        );
-        tarolo2Layout.setVerticalGroup(
-            tarolo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
-        );
+        jButton5.setText("jButton4");
 
-        javax.swing.GroupLayout tarolo1Layout = new javax.swing.GroupLayout(tarolo1);
-        tarolo1.setLayout(tarolo1Layout);
-        tarolo1Layout.setHorizontalGroup(
-            tarolo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
-        );
-        tarolo1Layout.setVerticalGroup(
-            tarolo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
-        );
+        jButton6.setText("jButton4");
 
         javax.swing.GroupLayout ladataroloLayout = new javax.swing.GroupLayout(ladatarolo);
         ladatarolo.setLayout(ladataroloLayout);
@@ -207,23 +195,33 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ladataroloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tarolo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tarolo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tarolo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         ladataroloLayout.setVerticalGroup(
             ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ladataroloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tarolo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tarolo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tarolo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ladataroloLayout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
+        jButton1.setText("KIVÁLASZT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout fotaroloLayout = new javax.swing.GroupLayout(fotarolo);
         fotarolo.setLayout(fotaroloLayout);
@@ -231,10 +229,14 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fotaroloLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ladatarolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(visszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ladatarolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(visszajelzes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fotaroloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         fotaroloLayout.setVerticalGroup(
             fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +245,9 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 .addComponent(ladatarolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(visszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,7 +315,21 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         kilep();
         // TODO add your handling code here:
     }//GEN-LAST:event_kilepesMouseClicked
+    private void ladaFeltolt() {
+        tomb_panel = new JPanel[ladatarolo.getComponentCount()];
+        for (int i = 0; i < tomb_panel.length; i++) {
+            Component component = ladatarolo.getComponent(i);
+            if (component instanceof JPanel) {
+                JPanel panel = (JPanel) component;
+                tomb_panel[i] = panel;
+            }
+        }
+        for (int i = 0; i < tomb_panel.length; i++) {
+            
+            
+        }
 
+    }
     private void titlebarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titlebarMouseDragged
         // TODO add your handling code here:
         int xx = evt.getXOnScreen();
@@ -323,6 +341,10 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         x = evt.getX();
         y = evt.getY();  // TODO add your handling code here:
     }//GEN-LAST:event_titlebarMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void kilep() {
         String[] gombok = {"Igen", "Nem"};
         int valasz = JOptionPane.showOptionDialog(null, "Biztosan szeretnél kilépni?", "Kilépés", JOptionPane.YES_NO_OPTION, 3, null, gombok, gombok[1]);
@@ -369,6 +391,11 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cim;
     private javax.swing.JPanel fotarolo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel kilepes;
     private javax.swing.JPanel ladatarolo;
     private javax.swing.JLabel menu1;
@@ -376,9 +403,6 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     private javax.swing.JLabel menu3;
     private javax.swing.JLabel menu4;
     private javax.swing.JPanel menubar;
-    private javax.swing.JPanel tarolo1;
-    private javax.swing.JPanel tarolo2;
-    private javax.swing.JPanel tarolo3;
     private javax.swing.JPanel titlebar;
     private javax.swing.JPanel visszajelzes;
     // End of variables declaration//GEN-END:variables
