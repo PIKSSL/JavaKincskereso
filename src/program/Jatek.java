@@ -7,12 +7,14 @@ import javax.swing.SwingUtilities;
 import modell.Lada;
 
 public class Jatek {
+
     //Adattagok
     private static final Scanner beker = new Scanner(System.in);
     private static GrafikusFelulet gui;
     private static Lada[] ladak = new Lada[3];
     private static final String kerdes = "Üdvözöllek a játékban!\nAdott 3 láda, egy arany, egy ezüst és egy bronz. Az egyikük drága kincset rejt magában.\nMelyik láda rejti a kincset?\nSegítség:Csak az egyik láda mondd igazat!\nA ládák segítenek neked abban, hogy megtudd!:)\nJó gondolkodást!";
     private static final String menu = "\n[1]Megoldás\n[2]Új játék\n[3]Kilépés";
+
     //Konstruktor
     Jatek() {
         this.ladak[0] = new Lada(Lada.ARANY, false, "Én rejtem a kincset!");
@@ -20,7 +22,7 @@ public class Jatek {
         this.ladak[2] = new Lada(Lada.BRONZ, false, "Az arany hazudik!");
         int valasz;
         ladaellenorzes();
-        String[] gombok = {"Igen", "Nem","Kilépés"};
+        String[] gombok = {"Igen", "Nem", "Kilépés"};
         do {
             valasz = JOptionPane.showOptionDialog(null, "Szeretnéd grafikus felületen játszani?", "Felület kiválasztása", JOptionPane.YES_NO_OPTION, 3, null, gombok, gombok[2]);
         } while (valasz < 0);
@@ -31,13 +33,14 @@ public class Jatek {
                     gui.setVisible(true);
                 }
             });
-        } else if(valasz==1){
+        } else if (valasz == 1) {
             konzolJatek();
-        }else{
+        } else {
             System.exit(0);
         }
 
     }
+
     //Metódusok
     private void konzolJatek() {
         System.out.println(kerdes);
@@ -74,7 +77,9 @@ public class Jatek {
     }
 
     private String bekeres(int hossz) {
-        if(hossz < 0){hossz = Math.abs(hossz);}
+        if (hossz < 0) {
+            hossz = Math.abs(hossz);
+        }
         System.out.print("Kérlek válassz egy opciót:\n>>");
         String valasztas = beker.nextLine();
         while (valasztas.isBlank() || valasztas.isEmpty() || !ellenor(valasztas, 10, hossz)) {
@@ -112,11 +117,11 @@ public class Jatek {
     }
 
     private void ladaellenorzes() {
-            for (int i = 0; i < ladak.length; i++) {
-            if(ladak[i] ==null){
-            JOptionPane.showMessageDialog(null, "Hiba a ládák létrehozásánál!","HIBA!", 0);
-            System.exit(0);
-        }
+        for (int i = 0; i < ladak.length; i++) {
+            if (ladak[i] == null) {
+                JOptionPane.showMessageDialog(null, "Hiba a ládák létrehozásánál!", "HIBA!", 0);
+                System.exit(0);
+            }
         }
     }
 
