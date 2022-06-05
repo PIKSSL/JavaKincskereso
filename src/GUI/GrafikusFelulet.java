@@ -7,12 +7,12 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import modell.Lada;
 import program.Jatek;
 
@@ -21,21 +21,28 @@ import program.Jatek;
  * @author hallgato
  */
 public class GrafikusFelulet extends javax.swing.JFrame {
-    private final Color gombokszine;
+    private Lada megoldas;
+    private static Color gombokszine;
     private JLabel[] tomb;
-    private JPanel[] tomb_panel;
+    private JButton[] lada_gombok;
     private final Lada[] ladak = Jatek.getLadak();
     private int x;
     private int y;
+    private JButton kivalasztott;
 
     /**
      * Creates new form GrafikusFelulet
      */
     public GrafikusFelulet() {
         initComponents();
+        this.ladak[0] = new Lada(Lada.ARANY, false, "Én rejtem a kincset!");
+        this.ladak[1] = new Lada(Lada.EZUST, true, "Nem én rejtem a kincset.");
+        this.ladak[2] = new Lada(Lada.BRONZ, false, "Az arany hazudik!");
         setLocationRelativeTo(null);
         gombokszine = menu2.getBackground();
         gombok();
+        ladaFeltolt();
+        ujjatek();
     }
 
     /**
@@ -53,16 +60,15 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         menubar = new javax.swing.JPanel();
         menu1 = new javax.swing.JLabel();
         menu2 = new javax.swing.JLabel();
-        menu3 = new javax.swing.JLabel();
         menu4 = new javax.swing.JLabel();
         fotarolo = new javax.swing.JPanel();
         visszajelzes = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        visszajelzo = new javax.swing.JLabel();
         ladatarolo = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ladaOpcio1 = new javax.swing.JButton();
+        ladaOpcio2 = new javax.swing.JButton();
+        ladaOpcio3 = new javax.swing.JButton();
+        kuldes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -118,24 +124,33 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         menu1.setForeground(new java.awt.Color(204, 204, 204));
         menu1.setText("Új játék");
         menu1.setOpaque(true);
+        menu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu1MouseClicked(evt);
+            }
+        });
 
         menu2.setBackground(new java.awt.Color(102, 102, 102));
         menu2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         menu2.setForeground(new java.awt.Color(204, 204, 204));
         menu2.setText("Megoldás");
         menu2.setOpaque(true);
-
-        menu3.setBackground(new java.awt.Color(102, 102, 102));
-        menu3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        menu3.setForeground(new java.awt.Color(204, 204, 204));
-        menu3.setText("Kérdés");
-        menu3.setOpaque(true);
+        menu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu2MouseClicked(evt);
+            }
+        });
 
         menu4.setBackground(new java.awt.Color(102, 102, 102));
         menu4.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         menu4.setForeground(new java.awt.Color(204, 0, 51));
         menu4.setText("Kilépés");
         menu4.setOpaque(true);
+        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout menubarLayout = new javax.swing.GroupLayout(menubar);
         menubar.setLayout(menubarLayout);
@@ -144,7 +159,6 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(menu2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
             .addComponent(menu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(menu3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menubarLayout.setVerticalGroup(
             menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,8 +166,6 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(menu3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(menu4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -162,7 +174,12 @@ public class GrafikusFelulet extends javax.swing.JFrame {
 
         visszajelzes.setBackground(new java.awt.Color(159, 162, 163));
 
-        jLabel1.setText("jLabel1");
+        visszajelzo.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        visszajelzo.setToolTipText("");
+        visszajelzo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        visszajelzo.setAutoscrolls(true);
+        visszajelzo.setMaximumSize(new java.awt.Dimension(0, 552));
+        visszajelzo.setMinimumSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout visszajelzesLayout = new javax.swing.GroupLayout(visszajelzes);
         visszajelzes.setLayout(visszajelzesLayout);
@@ -170,24 +187,39 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             visszajelzesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(visszajelzesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(visszajelzo, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         visszajelzesLayout.setVerticalGroup(
             visszajelzesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, visszajelzesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addComponent(visszajelzo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         ladatarolo.setBackground(new java.awt.Color(200, 200, 200));
 
-        jButton4.setText("jButton4");
+        ladaOpcio1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ladaOpcio1.setDefaultCapable(false);
+        ladaOpcio1.setOpaque(true);
+        ladaOpcio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kincsesLada(evt);
+            }
+        });
 
-        jButton5.setText("jButton4");
+        ladaOpcio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kincsesLada(evt);
+            }
+        });
 
-        jButton6.setText("jButton4");
+        ladaOpcio3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kincsesLada(evt);
+            }
+        });
 
         javax.swing.GroupLayout ladataroloLayout = new javax.swing.GroupLayout(ladatarolo);
         ladatarolo.setLayout(ladataroloLayout);
@@ -195,11 +227,11 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ladataroloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ladaOpcio1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ladaOpcio2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ladaOpcio3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         ladataroloLayout.setVerticalGroup(
@@ -207,19 +239,19 @@ public class GrafikusFelulet extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ladataroloLayout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(ladataroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ladaOpcio2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ladaOpcio1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ladaOpcio3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 102));
-        jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 204, 204));
-        jButton1.setText("KIVÁLASZT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        kuldes.setBackground(new java.awt.Color(102, 102, 102));
+        kuldes.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        kuldes.setForeground(new java.awt.Color(204, 204, 204));
+        kuldes.setText("KIVÁLASZT");
+        kuldes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                kuldesActionPerformed(evt);
             }
         });
 
@@ -232,10 +264,10 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 .addGroup(fotaroloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ladatarolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(visszajelzes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fotaroloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(kuldes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         fotaroloLayout.setVerticalGroup(
@@ -246,7 +278,7 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(visszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(kuldes, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -278,7 +310,6 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 public void mouseEntered(MouseEvent evt) {
                     panel.setForeground(szin1);
                 }
-
                 public void mouseExited(MouseEvent evt) {
                     panel.setForeground(szin2);
                 }
@@ -288,7 +319,6 @@ public class GrafikusFelulet extends javax.swing.JFrame {
                 public void mouseEntered(MouseEvent evt) {
                     panel.setBackground(szin1);
                 }
-
                 public void mouseExited(MouseEvent evt) {
                     panel.setBackground(szin2);
                 }
@@ -311,27 +341,30 @@ public class GrafikusFelulet extends javax.swing.JFrame {
         }
     }
     private void kilepesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kilepesMouseClicked
-
         kilep();
-        // TODO add your handling code here:
     }//GEN-LAST:event_kilepesMouseClicked
     private void ladaFeltolt() {
-        tomb_panel = new JPanel[ladatarolo.getComponentCount()];
-        for (int i = 0; i < tomb_panel.length; i++) {
+        lada_gombok = new JButton[ladatarolo.getComponentCount()];
+        for (int i = 0; i < lada_gombok.length; i++) {
             Component component = ladatarolo.getComponent(i);
-            if (component instanceof JPanel) {
-                JPanel panel = (JPanel) component;
-                tomb_panel[i] = panel;
+            if (component instanceof JButton) {
+                JButton gomb = (JButton) component;
+                lada_gombok[i] = gomb;
             }
         }
-        for (int i = 0; i < tomb_panel.length; i++) {
-            
-            
+        for (int i = 0; i < lada_gombok.length; i++) {
+            if(ladak[i].isKincses()){
+                megoldas = ladak[i];
+            }
+            Icon kep = ladak[i].getLada_kep();
+            lada_gombok[i].setIcon(kep);
+            lada_gombok[i].setText(Integer.toString(i));
         }
+        pack();
 
     }
+
     private void titlebarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titlebarMouseDragged
-        // TODO add your handling code here:
         int xx = evt.getXOnScreen();
         int yy = evt.getYOnScreen();
         this.setLocation(xx - x, yy - y);
@@ -339,12 +372,54 @@ public class GrafikusFelulet extends javax.swing.JFrame {
 
     private void titlebarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titlebarMousePressed
         x = evt.getX();
-        y = evt.getY();  // TODO add your handling code here:
+        y = evt.getY();  
     }//GEN-LAST:event_titlebarMousePressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void kuldesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kuldesActionPerformed
+        if (ladak[Integer.parseInt(kivalasztott.getText())].isKincses()) {
+            visszajelzo.setText("Gratulálok, megtaláltad a kincset!:)");
+            gomb_ena(false);
+        } else {
+            visszajelzo.setText("Sajnálom, nem ebben a ládában van a kincs.:(");
+            gomb_ena(false);
+        }
+    }//GEN-LAST:event_kuldesActionPerformed
+    private void gomb_ena(boolean parameter) {
+        for (JButton gomb : lada_gombok) {
+            gomb.setEnabled(parameter);
+        }
+    }
+    private void kincsesLada(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kincsesLada
+        kivalasztott = (JButton) evt.getSource();
+        visszajelzo.setText("<html>"+"Kiválasztott láda: "+ladak[Integer.parseInt(kivalasztott.getText())].getFajta()+"<br>"+ladak[Integer.parseInt(kivalasztott.getText())].getSzoveg());
+        kuldes.setEnabled(true);
+    }//GEN-LAST:event_kincsesLada
+
+    private void menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseClicked
+        kilep();
+    }//GEN-LAST:event_menu4MouseClicked
+    private void ujjatek(){
+        gomb_ena(true);
+        visszajelzo.setText(vagdal(Jatek.getKerdes()));
+        kuldes.setEnabled(false);
+        kivalasztott = null;
+    }
+    private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
+        ujjatek();
+    }//GEN-LAST:event_menu1MouseClicked
+    private String vagdal(String adat){
+        String teljes="<html>";
+        String[] szoveg =adat.split("\n");
+        for (String string : szoveg) {
+            teljes+=string+"<br>";
+        }
+        return teljes+"</html>";
+    }
+    private void menu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseClicked
+        gomb_ena(false); 
+        kuldes.setEnabled(false);
+        visszajelzo.setText(vagdal(Jatek.getMegoldas(megoldas.getFajta())));
+    }//GEN-LAST:event_menu2MouseClicked
     private void kilep() {
         String[] gombok = {"Igen", "Nem"};
         int valasz = JOptionPane.showOptionDialog(null, "Biztosan szeretnél kilépni?", "Kilépés", JOptionPane.YES_NO_OPTION, 3, null, gombok, gombok[1]);
@@ -391,19 +466,18 @@ public class GrafikusFelulet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cim;
     private javax.swing.JPanel fotarolo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel kilepes;
+    private javax.swing.JButton kuldes;
+    private javax.swing.JButton ladaOpcio1;
+    private javax.swing.JButton ladaOpcio2;
+    private javax.swing.JButton ladaOpcio3;
     private javax.swing.JPanel ladatarolo;
     private javax.swing.JLabel menu1;
     private javax.swing.JLabel menu2;
-    private javax.swing.JLabel menu3;
     private javax.swing.JLabel menu4;
     private javax.swing.JPanel menubar;
     private javax.swing.JPanel titlebar;
     private javax.swing.JPanel visszajelzes;
+    private javax.swing.JLabel visszajelzo;
     // End of variables declaration//GEN-END:variables
 }

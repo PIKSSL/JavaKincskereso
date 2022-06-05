@@ -11,8 +11,9 @@ public class Jatek {
     private static final Scanner beker = new Scanner(System.in);
     private static GrafikusFelulet gui;
     private static Lada[] ladak = new Lada[3];
+    private static final String kerdes ="Üdvözöllek a játékban!\nAdott 3 láda, egy arany, egy ezüst és egy bronz. Az egyikük drága kincset rejt magában.\nMelyik láda rejti a kincset?\nSegítség:Csak az egyik láda mondd igazat!\nA ládák segítenek neked abban, hogy megtudd!:)\nJó gondolkodást!";
     private static final String menu="\n[1]Megoldás\n[2]Új játék\n[3]Kilépés";
-
+    
     Jatek() {
         this.ladak[0] = new Lada(Lada.ARANY, false, "Én rejtem a kincset!");
         this.ladak[1] = new Lada(Lada.EZUST, true, "Nem én rejtem a kincset.");
@@ -37,7 +38,7 @@ public class Jatek {
     }
 
     private void konzolJatek() {
-        System.out.println("Üdvözöllek a játékban!\nAdott 3 láda, egy arany, egy ezüst és egy bronz. Az egyikük drága kincset rejt magában.\nMelyik láda rejti a kincet?\nSegítség:Csak az egyik láda mondd igazat!\nA ládák segítenek neked abban, hogy megtudd!:)\nJó gondolkodást!");
+        System.out.println(kerdes);
         int index = 1;
         
         for (Lada lada : ladak) {
@@ -65,7 +66,7 @@ public class Jatek {
     }
     private void megoldas(int valasz){
         if(valasz==1)
-                System.out.println("A helyes megoldás:Az "+ladak[1].getFajta()+" láda rejti a kincset.\nHa az arany igazat mond, akkor az ezüst is, ezért az arany kizárva.Ha nincs az aranyan, akkor a Bronz mond igazat, tehát az ezüst is hazudik. És mivel az ezüst azt állítja, hogy nem ő rejti a kincset, ami nem igaz, így a megoldás az, hogy az ezüst ládában van elrejtve a kincs.");
+                System.out.printf(getMegoldas(ladak[1].getFajta()));
         else if(valasz==2){
             konzolJatek();
         }
@@ -94,6 +95,12 @@ public class Jatek {
 
     public static Lada[] getLadak() {
         return ladak;
+    }
+    public static String getKerdes(){
+        return kerdes;
+    }
+    public static String getMegoldas(String helyes){
+        return "A helyes megoldás:Az "+helyes+" láda rejti a kincset.\nHa az arany igazat mond, akkor az ezüst is, ezért az arany kizárva.Ha nincs az aranyban, akkor a Bronz mond igazat, tehát az ezüst is hazudik. És mivel az ezüst azt állítja, hogy nem ő rejti a kincset, ami nem igaz, így a megoldás az, hogy az ezüst ládában van elrejtve a kincs.";
     }
      
 }
